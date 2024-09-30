@@ -1,0 +1,222 @@
+#variables
+#1
+x = 5
+y = "John"
+print(x)
+print(y)
+print(type(x))
+print(type(y))
+
+#data types
+#2
+num=10
+num2=10.4
+name="hello world"
+isvalid=True
+print(type(num))
+print(type(num2))
+print(type(name))
+print(type(isvalid))
+
+#if-else
+#3
+a = 200
+b = 33
+if b > a:
+  print("b is greater than a")
+elif a == b:
+  print("a and b are equal")
+else:
+  print("a is greater than b")
+
+#for loop
+#4
+fruits = ["apple", "banana", "cherry"]
+for x in fruits:
+  print(x)
+
+#break
+fruits = ["apple", "banana", "cherry"]
+for x in fruits:
+  if x == "banana":
+    break
+  print(x)
+
+#continue
+fruits = ["apple", "banana", "cherry"]
+for x in fruits:
+  if x == "banana":
+    continue
+  print(x)
+
+#range
+for x in range(6):
+  print(x)
+else:
+  print("Finally finished!")
+
+#while loop
+#5
+i = 1
+while i < 10:
+  print(i)
+  i += 1
+
+#break
+i = 1
+while i < 6:
+  print(i)
+  if i == 3:
+    break
+  i += 1
+
+#continue
+i = 0
+while i < 6:
+  i += 1
+  if i == 3:
+    continue
+  print(i)
+
+#function
+#6
+def my_function():
+  print("Hello from a function")
+
+my_function()
+
+#arguements
+def my_function(fname):
+  print(fname + " Refsnes")
+
+my_function("Emil")
+my_function("Tobias")
+my_function("Linus")
+
+#arbitary arguements
+def my_function(*kids):
+  print("The youngest child is " + kids[2])
+
+my_function("Emil", "Tobias", "Linus")
+
+#keyword arguements
+def my_function(child3, child2, child1):
+  print("The youngest child is " + child3)
+
+my_function(child1 = "Emil", child2 = "Tobias", child3 = "Linus")
+
+#default parameter value
+def my_function(country = "Norway"):
+  print("I am from " + country)
+
+my_function("Sweden")
+my_function("India")
+my_function()
+my_function("Brazil")
+
+#return values
+def my_function(x):
+  return 5 * x
+
+print(my_function(3))
+print(my_function(5))
+print(my_function(9))
+
+
+
+#lists
+#1
+thislist = ["apple", "banana", "cherry", "blueberry", "pineapple"]
+print(thislist)
+
+#length of list
+print(len(thislist))
+
+#access list
+print(thislist[1])
+print(thislist[-1])
+print(thislist[2:5])
+print(thislist[:4])
+print(thislist[2:])
+
+#update list items
+thislist[1] = "blackcurrant"
+print(thislist)
+
+#insert items
+thislist.insert(2, "watermelon")
+print(thislist)
+
+#add list items
+thislist.append("orange")
+print(thislist)
+
+#remove or pop items
+thislist.remove("banana")
+thislist.pop(1)
+print(thislist)
+
+#dictionaries
+#2
+thisdict = {
+  "brand": "Ford",
+  "model": "Mustang",
+  "year": 1964
+}
+print(thisdict)
+
+#length of dictionary
+print(len(thisdict))
+
+#get keys and values
+x = thisdict.keys()
+y = thisdict.values()
+z = thisdict.items()
+print(x)
+print(y)
+print(z)
+
+#update dictionary
+thisdict["year"] = 2018
+thisdict.update({"year": 2020})
+print(thisdict)
+
+#add items
+thisdict["color"] = "red"
+thisdict.update({"color": "red"})
+print(thisdict)
+
+#remove items
+thisdict.pop("model")
+thisdict.popitem()
+print(thisdict)
+
+#tuples
+#3
+thistuple = ("apple", "banana", "cherry","orange", "kiwi", "melon", "mango")
+print(thistuple)
+
+#length of tuple
+print(len(thistuple))
+
+#access tuples
+print(thistuple[1])
+print(thistuple[-1])
+print(thistuple[2:5])
+print(thistuple[-4:-1])
+
+#change tuple values
+a = list(b) # type: ignore
+a[1] = "kiwi"
+b = tuple(a)
+print(b)
+
+#add values
+c = list(thistuple)
+c.append("orange")
+thistuple = tuple(c)
+
+#remove items
+d = list(thistuple)
+d.remove("apple")
+thistuple = tuple(d)
