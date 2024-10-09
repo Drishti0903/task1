@@ -1,0 +1,139 @@
+import pandas as pd # type: ignore
+#1 Dataframes
+data = {
+  "calories": [420, 380, 390],
+  "duration": [50, 40, 45]
+}
+
+#load data into a DataFrame object:
+df = pd.DataFrame(data)
+
+print(df)
+print(df.loc[0])
+print(df.loc[[0, 1]])
+df1 = pd.DataFrame(data, index = ["day1", "day2", "day3"])
+
+print(df1)
+print(df1.loc["day2"])
+
+#2 Read CSV files
+df2 = pd.read_csv("C:/Users/drish/OneDrive/Downloads/data.csv")
+
+print(df2) 
+print(pd.options.display.max_rows) 
+pd.options.display.max_rows = 9999
+print(df2)
+print(df2.head(10))
+print(df2.tail())
+print(df2.info())
+
+#3 Cleaning data 
+new_df = df2.dropna()
+print(new_df.to_string())
+
+df2.dropna(inplace = True)
+print(df.to_string())
+
+df2.fillna(130, inplace = True)
+
+df2["Calories"].fillna(130, inplace = True)
+
+x = df2["Calories"].mean()
+df2["Calories"].fillna(x, inplace = True)
+
+x1 = df2["Calories"].median()
+df2["Calories"].fillna(x1, inplace = True)
+
+x2= df2["Calories"].mode()[0]
+df2["Calories"].fillna(x2, inplace = True)
+
+print(df2.duplicated())
+
+df2.drop_duplicates(inplace = True)
+
+#4 numpy sorting filtering grouping data
+import numpy as np # type: ignore
+arr1 = np.array([1, 2, 3])
+arr2 = np.array([4, 5, 6])
+arr = np.concatenate((arr1, arr2))
+print(arr)
+
+arr3 = np.array([[1, 2], [3, 4]])
+arr4 = np.array([[5, 6], [7, 8]])
+arr5 = np.concatenate((arr3, arr4), axis=1)
+print(arr5)
+
+arr6 = np.stack((arr3, arr4), axis=1)
+print(arr6)
+
+arr7 = np.hstack((arr1, arr2))
+print(arr7)
+
+arr8 = np.vstack((arr1, arr2))
+print(arr8)
+
+#sort
+arr9 = np.array([3, 2, 0, 1])
+print(np.sort(arr9))
+
+arr10 = np.array(['banana', 'cherry', 'apple'])
+print(np.sort(arr10))
+
+arr11 = np.array([True, False, True])
+print(np.sort(arr11))
+
+arr12 = np.array([[3, 2, 4], [5, 0, 1]])
+print(np.sort(arr12))
+
+#filter
+arr13= np.array([41, 42, 43, 44])
+x3 = [True, False, True, False]
+newarr = arr[x3]
+print(newarr)
+
+
+arr14 = np.array([41, 42, 43, 44])
+# Create an empty list
+filter_arr = []
+# go through each element in arr
+for element in arr14:
+  # if the element is higher than 42, set the value to True, otherwise False:
+  if element > 42:
+    filter_arr.append(True)
+  else:
+    filter_arr.append(False)
+
+newarr1 = arr14[filter_arr]
+
+print(filter_arr)
+print(newarr1)
+
+
+arr15 = np.array([1, 2, 3, 4, 5, 6, 7])
+# Create an empty list
+filter_arr1 = []
+# go through each element in arr
+for element in arr15:
+  # if the element is completely divisble by 2, set the value to True, otherwise False
+  if element % 2 == 0:
+    filter_arr1.append(True)
+  else:
+    filter_arr1.append(False)
+
+newarr2 = arr[filter_arr1]
+
+print(filter_arr1)
+print(newarr2)
+
+
+arr16 = np.array([41, 42, 43, 44])
+filter_arr2 = arr16 > 42
+newarr3 = arr16[filter_arr2]
+print(filter_arr2)
+print(newarr3)
+
+arr17 = np.array([1, 2, 3, 4, 5, 6, 7])
+filter_arr3 = arr17 % 2 == 0
+newarr4 = arr17[filter_arr3]
+print(filter_arr3)
+print(newarr4)
