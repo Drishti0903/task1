@@ -1,0 +1,33 @@
+import pandas as pd # type: ignore
+import requests
+from bs4 import BeautifulSoup
+
+# Step 1: Fetch the web page
+url = 'https://en.wikipedia.org/wiki/List_of_countries_by_population_(United_Nations)'  # Replace with the URL of the page you want to scrape
+response = requests.get(url)
+
+# Step 2: Parse the page content
+soup = BeautifulSoup(response.text, 'html.parser')
+
+# Step 3: Extract the title of the page
+page_title = soup.title.string
+print(f"Page Title: {page_title}")
+
+# Step 4: Extract all text
+page_text = soup.get_text()
+print(f"Page Text: {page_text[:200]}...")  # Print first 200 characters of the text
+
+# Step 5: Extract all links
+links = soup.find_all('a')  # Find all anchor tags
+for link in links:
+    href = link.get('href')
+    text = link.get_text()
+    print(f"Link: {text} -> {href}")
+
+# Step 6: Extract all images
+images = soup.find_all('img')  # Find all image tags
+for img in images:
+    img_url = img.get('src')
+    alt_text = img.get('alt', 'No Alt Text')  # Default to 'No Alt Text' if alt is missing
+    print(f"Image: {img_url} (Alt text: {alt_text})")
+
