@@ -1,0 +1,65 @@
+import tkinter as tk
+from tkinter import ttk, messagebox
+import requests # type: ignore
+
+# Function to fetch live exchange rates from an API
+def fetch_exchange_rates():
+    url = "https://open.er-api.com/v6/latest/USD"  # Example API endpoint for USD rates
+    try:
+        response = requests.get(url)
+        data = response.json()
+        if data['result'] == 'success':
+            return data['rates']
+        else:
+            messagebox.showerror("Error", "Failed to fetch exchange rates.")
+    except Exception as e:
+        messagebox.showerror("Error", f"An error occurred: {e}")
+    return None
+
+# Function to perform currency conversion
+def convert_currency():
+    try:
+        usd_amount = float(usd_entry.get())
+        target_currency = target_currency_combobox.get()
+        if target_currency not in exchange_rates:
+            messagebox.showerror("Error", "Invalid target currency.")
+            return
+        converted_amount = usd_amount * exchange_rates[target_currency]
+        result_label.config(text=f"{usd_amount} USD = {converted_amount:.2f} {target_currency}")
+    except ValueError:
+        messagebox.showerror("Error", "Please enter a valid number.")
+
+# Initialize the GUI window
+root = tk.Tk()
+root.title("USD Currency Converter")
+root.geometry("400x300")
+
+# Fetch exchange rates
+exchange_rates = fetch_exchange_rates()
+if not exchange_rates:
+    root.destroy()  # Close the app if exchange rates cannot be fetched
+
+# Create and place widgets
+title_label = tk.Label(root, text="USD Currency Converter", font=("Arial", 16))
+title_label.pack(pady=10)
+
+usd_label = tk.Label(root, text="Amount in USD:")
+usd_label.pack(pady=5)
+usd_entry = tk.Entry(root, width=20)
+usd_entry.pack(pady=5)
+
+target_currency_label = tk.Label(root, text="Target Currency:")
+target_currency_label.pack(pady=5)
+
+target_currency_combobox = ttk.Combobox(root, values=list(exchange_rates.keys()), width=15)
+target_currency_combobox.pack(pady=5)
+target_currency_combobox.set("Select Currency")
+
+convert_button = tk.Button(root, text="Convert", command=convert_currency)
+convert_button.pack(pady=10)
+
+result_label = tk.Label(root, text="", font=("Arial", 14))
+result_label.pack(pady=10)
+
+# Run the GUI event loop
+root.mainloop()
